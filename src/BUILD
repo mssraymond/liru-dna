@@ -1,11 +1,11 @@
 py_library(
     name = "spacex_lib",
     srcs = ["spacex.py"],
+    visibility = ["//visibility:public"],  # Make this library visible to all targets
     deps = [
         ":github_lib",
         ":logger_lib",
     ],
-    visibility = ["//visibility:public"],  # Make this library visible to all targets
 )
 
 py_library(

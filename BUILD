@@ -3,8 +3,8 @@ py_binary(
     name = "run_liru",
     srcs = ["pg_ingest.py"],  # adjust for your script location
     deps = [
-        "@rules_python//python:pip_import",
         "//requirements.txt",
+        "@rules_python//python:pip_import",
     ],
 )
 
@@ -24,10 +24,13 @@ py_binary(
 py_test(
     name = "unit_tests",
     srcs = ["test.py"],
+    args = ["--bazel"],
+    data = [
+        "secrets.yml",
+        "test_output/test_result.txt",
+    ],
     main = "test.py",
     deps = [
         "//src:spacex_lib",
     ],
-    data = ["secrets.yml", "test_output/test_result.txt"],
-    args = ["--bazel"],
 )
