@@ -3,3 +3,5 @@ secrets.yml
 src/__pycache__
 test_output/
 .vscode/
+MODULE*
+bazel-*
