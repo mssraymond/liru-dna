@@ -1,0 +1,27 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    hostname: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 15s
+      retries: 5
+      start_period: 10s
+
+  ingest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: ingest
+    container_name: ingest
+    command: ["python", "pg_ingest.py"]
+    depends_on:
+      postgres:
+        condition: service_healthy
