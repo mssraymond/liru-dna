@@ -45,9 +45,11 @@ def pretty_print_bazel(obj: Any, overwrite: bool = False) -> None:
         return
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as temp_file:
         jsonified = json.dumps(obj=obj, indent=2)
+        print(jsonified)
         temp_file.write(jsonified + "\n")
         if isinstance(obj, list):
             len_msg = f"Array Length: {len(obj)}"
+            print(len_msg)
             temp_file.write(len_msg + "\n")
 
 
